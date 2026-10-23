@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>BAT 401 Reviewer</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;800&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fbf6f4;--surface:#fff;--ink:#2a1517;--muted:#6f5558;--maroon:#7a0c14;--blush:#f3dcdc;--line:#e6d3d3;--code:#2b1a1c;--codeink:#f7e9e9;--ok:#1f7a4d;--bad:#b3261e;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1a0f10;--surface:#251517;--ink:#f5e8e8;--muted:#b99a9d;--maroon:#e8707a;--blush:#3a1f22;--line:#4a2d30;--code:#0f0808;--codeink:#f7e9e9;--ok:#5fcf97;--bad:#ff8a80;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#1a0f10;--surface:#251517;--ink:#f5e8e8;--muted:#b99a9d;--maroon:#e8707a;--blush:#3a1f22;--line:#4a2d30;--code:#0f0808;--codeink:#f7e9e9;--ok:#5fcf97;--bad:#ff8a80;color-scheme:dark}
+html{scroll-padding-top:70px;scroll-behavior:smooth}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 "IBM Plex Sans",system-ui,sans-serif}
+h1,h2,h3{font-family:Fraunces,Georgia,serif;line-height:1.15;margin:0 0 .5em}
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--maroon);color:#fff;display:flex;align-items:center;gap:12px;padding:10px 18px}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--maroon);z-index:6}
+header.top b{font-family:Fraunces,serif;font-size:18px;flex:1}
+header.top input{padding:7px 12px;border-radius:20px;border:0;width:min(240px,40vw);font:inherit;font-size:14px;background:#ffffff26;color:#fff}
+header.top input::placeholder{color:#ffffffc0}
+button{font:inherit;cursor:pointer}
+.theme{background:#ffffff26;color:#fff;border:0;border-radius:20px;padding:6px 12px;font-size:14px}
+:focus-visible{outline:3px solid #f0a;outline-offset:2px}
+.wrap{display:grid;grid-template-columns:230px minmax(0,1fr);gap:28px;max-width:1100px;margin:0 auto;padding:24px 18px 60px}
+nav.side{position:sticky;top:76px;align-self:start;display:flex;flex-direction:column;gap:2px}
+nav.side a{padding:8px 12px;border-radius:8px;color:var(--muted);text-decoration:none;font-size:15px;border-left:3px solid transparent}
+nav.side a.on{background:var(--blush);color:var(--maroon);border-left-color:var(--maroon);font-weight:600}
+.bar{height:6px;background:var(--line);border-radius:3px;margin:12px 12px 0;overflow:hidden}.bar i{display:block;height:100%;width:0;background:var(--maroon)}
+.hero h1{font-size:clamp(34px,6vw,56px);color:var(--maroon);font-weight:800;margin-bottom:.2em}
+.hero p{max-width:60ch;color:var(--muted);margin:0 0 20px}
+.flow{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:0 0 30px;padding:0;list-style:none}
+.flow li{background:var(--blush);border-radius:12px;padding:14px}
+.flow b{font-family:Fraunces,serif;font-size:19px;display:block}.flow span{font-size:14px;color:var(--muted)}
+.flow button{all:unset;cursor:pointer;display:block;width:100%}
+section.pane{display:none}section.pane.on{display:block}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin:0 0 16px}
+.card h3{font-size:22px;color:var(--maroon)}
+.card ol,.card ul{padding-left:22px;margin:.5em 0}
+.card li{margin:.25em 0}
+.tip{border-left:4px solid var(--maroon);background:var(--blush);padding:10px 14px;border-radius:0 8px 8px 0;margin:12px 0;font-size:15px}
+pre{background:var(--code);color:var(--codeink);padding:14px 16px;border-radius:10px;overflow-x:auto;font:14px/1.5 ui-monospace,Menlo,Consolas,monospace;margin:10px 0;position:relative}
+.copy{position:absolute;top:8px;right:8px;background:#ffffff22;color:#fff;border:0;border-radius:6px;padding:3px 9px;font-size:12px}
+details{border:1px solid var(--line);border-radius:10px;margin:8px 0;background:var(--surface)}
+summary{padding:11px 14px;cursor:pointer;font-weight:600}
+details>div{padding:0 14px 12px}
+.tbl{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:15px}th,td{border:1px solid var(--line);padding:8px 10px;text-align:left}th{background:var(--blush)}
+.fc{perspective:900px;height:200px;margin:14px 0}
+.fc div{height:100%;border-radius:16px;display:grid;place-items:center;text-align:center;padding:24px;font-size:19px;background:var(--maroon);color:#fff;cursor:pointer;transition:transform .4s}
+.fc div.flip{background:var(--surface);color:var(--ink);border:2px solid var(--maroon);transform:rotateX(360deg)}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.btn{background:var(--maroon);color:#fff;border:0;border-radius:8px;padding:9px 16px;font-weight:600}
+.btn.alt{background:var(--blush);color:var(--maroon)}
+.opt{display:block;width:100%;text-align:left;background:var(--surface);color:var(--ink);border:1.5px solid var(--line);border-radius:10px;padding:11px 14px;margin:8px 0}
+.opt:hover:not(:disabled){border-color:var(--maroon)}
+.opt.ok{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 14%,var(--surface))}
+.opt.bad{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 14%,var(--surface))}
+.fb{margin-top:8px;font-size:15px;color:var(--muted)}
+mark{background:#ffd54f;color:#000;border-radius:3px}
+@media(max-width:760px){.wrap{grid-template-columns:1fr}nav.side{position:static;flex-direction:row;overflow-x:auto}nav.side a{white-space:nowrap;border-left:0;border-bottom:3px solid transparent}nav.side a.on{border-bottom-color:var(--maroon)}.flow{grid-template-columns:1fr 1fr}.bar{display:none}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<header class="top"><b>BAT 401 Reviewer</b><input id="q" type="search" placeholder="Search topics…" aria-label="Search"><button class="theme" id="th">Theme</button></header>
+<div class="wrap">
+<nav class="side" id="nav" aria-label="Sections"></nav>
+<main id="main">
+
+<section class="pane" id="home">
+<div class="hero"><h1>Tableau workflow</h1><p>Review for BAT 401: the six Tableau steps, sets and groups, and data cleaning in Google Colab. Tap a step to jump in, then test yourself in Flashcards and Quiz.</p></div>
+<ul class="flow">
+<li><button data-go="tableau"><b>1 Connect</b><span>Choose Excel, CSV, database, or sample data.</span></button></li>
+<li><button data-go="tableau"><b>2 Inspect</b><span>Check fields, data types, and missing values.</span></button></li>
+<li><button data-go="tableau"><b>3 Build</b><span>Drag dimensions and measures to shelves.</span></button></li>
+<li><button data-go="style"><b>4 Style</b><span>Use color, labels, filters, and tooltips.</span></button></li>
+<li><button data-go="style"><b>5 Dashboard</b><span>Combine related charts in one view.</span></button></li>
+<li><button data-go="style"><b>6 Share</b><span>Present, export, or publish the workbook.</span></button></li>
+</ul>
+<div class="card"><h3>What is Tableau?</h3><p>Tableau is a business intelligence and data visualization tool. It lets users connect to different data sources, analyze information, create interactive visualizations, and communicate insights.</p></div>
+</section>
+
+<section class="pane" id="tableau">
+<div class="card"><h3>Step 1: Connect</h3><p>Connect Tableau to a data source such as Excel, CSV, or a database. Example: to analyze a store's sales performance, load its sales records first.</p>
+<ol><li>Open Tableau Public or Tableau Desktop.</li><li>Locate the Connect panel.</li><li>Choose Microsoft Excel or Text File, depending on your dataset.</li><li>Select the dataset from your computer.</li><li>Wait for the data source page to load.</li><li>Confirm the required table or sheet is included.</li></ol></div>
+<div class="card"><h3>Step 2: Inspect</h3><p>Check the dataset for missing values, duplicates, and incorrect data types. Example: if Sales is read as text instead of numbers, correct it.</p>
+<ol><li>Open the Data Source page.</li><li>Review field names and the data preview.</li><li>Examine the data type icons.</li><li>Change incorrect data types when necessary.</li><li>Identify null values or unexpected entries.</li><li>Check relationships or joins when multiple tables are used.</li><li>Resolve major data-quality issues before proceeding.</li></ol></div>
+<div class="card"><h3>Step 3: Build</h3><p>Create charts by dragging dimensions and measures into Rows and Columns. Example: a bar chart comparing product sales to find the highest revenue.</p>
+<div class="tbl"><table><tr><th>Part</th><th>Purpose</th><th>In the screenshot</th></tr>
+<tr><td>Columns</td><td>Organizes data horizontally</td><td>Category splits into Technology, Furniture, Office Supplies</td></tr>
+<tr><td>Rows</td><td>Organizes data vertically (Y-axis)</td><td>SUM(Sales) gives total sales per category</td></tr>
+<tr><td>Filters</td><td>Shows only data that meets conditions</td><td>Empty, so no worksheet filter applied. Adding Region would filter by region</td></tr>
+<tr><td>Marks</td><td>Color, label, size, tooltip</td><td>Category on Color; AVG(Sales) on Label while bar height is total sales</td></tr>
+<tr><td>Dashboard</td><td>Combines worksheets into one interactive view</td><td>Dashboard 1 tab at the bottom</td></tr></table></div></div>
+</section>
+
+<section class="pane" id="sets">
+<div class="card"><h3>Groups</h3><p>A Group combines multiple data members into a single category, which organizes data and makes visuals easier to read.</p>
+<p><b>Create a brand group:</b></p>
+<ol><li>Right-click Product Name in the Data pane.</li><li>Select Create Group.</li><li>Select all products of the same brand, such as Xerox.</li><li>Click Group and rename it XEROX.</li><li>Repeat for other brands.</li><li>Rename the new group field BRANDS.</li><li>Drag BRANDS and Product Name into Rows.</li></ol></div>
+<div class="card"><h3>Sets</h3><p>A Set defines a subset of data based on selected members or conditions. Tableau classifies members as <b>In</b> or <b>Out</b>.</p>
+<p><b>Create a Top 5 Set:</b></p>
+<ol><li>Right-click Sub-Category in the Data pane.</li><li>Select Create Set.</li><li>Open the Top tab.</li><li>Choose By Field, then Top 5 by SUM(Sales).</li><li>Click OK.</li><li>Drag the Set to Color on the Marks card to separate In and Out.</li><li>Drag the same Set to Label to show In/Out above the bars.</li></ol>
+<div class="tip">Group = combine members into one category. Set = In/Out subset based on a condition.</div></div>
+</section>
+
+<section class="pane" id="style">
+<div class="card"><h3>Step 4: Style</h3><p>Improve appearance and readability.</p>
+<details open><summary>A. Colors</summary><div>Highlight important information and distinguish categories. Example: green for branches that hit sales targets, red for those that did not. <b>Marks, then Color.</b></div></details>
+<details open><summary>B. Labels</summary><div>Show exact values on the chart, such as ₱71,500. <b>Marks, then Label, then Show Mark Labels.</b></div></details>
+<details open><summary>C. Filters</summary><div>Show only what you want to analyze without changing the dataset. Example: CALABARZON region only. <b>Drag the field to the Filters shelf.</b></div></details>
+<details open><summary>D. Tooltips</summary><div>Extra information on hover, such as total sales, profit, and quantity sold. <b>Marks, then Tooltip.</b></div></details></div>
+<div class="card"><h3>Step 5: Dashboard</h3><p>Combine multiple charts into one interactive view, such as total sales, monthly trends, and best-selling products.</p>
+<ol><li>Create the visualizations in separate worksheets.</li><li>Click the New Dashboard icon.</li><li>Select an appropriate dashboard size.</li><li>Drag worksheets into the dashboard.</li><li>Arrange with horizontal or vertical containers.</li><li>Add text, legends, and filters as necessary.</li><li>Configure dashboard filter actions so a selection in one chart affects the others.</li><li>Test that it is readable and interactive.</li></ol></div>
+<div class="card"><h3>Step 6: Share</h3><p>Present, export, or publish. Example: publish the dashboard on Tableau Public or export it as a PDF to present to management.</p></div>
+</section>
+
+<section class="pane" id="colab">
+<div class="card"><h3>Data cleaning in Google Colab</h3><p>Data cleaning identifies and corrects errors, inconsistencies, duplicate records, and missing values. Inaccurate or incomplete data leads to misleading analysis and poor decisions.</p>
+<div class="tip"><b>Sample exam question:</b> Write Python code that shows a table of missing values per column. Answer: <code>df.isnull().sum()</code></div></div>
+<div class="card" id="steps"></div>
+<div class="card"><h3>Mean vs. mode</h3><p>Use <b>mean</b> for numerical data (Amount). Use <b>mode</b> for categorical data (Payment_Method: Cash, Credit Card, E-Wallet), because you cannot compute a mean or median of text.</p>
+<div class="tip">Common mistake: <code>fillna(df['Payment_Method'].mean())</code> fails on text. Use <code>.mode()[0]</code>.</div></div>
+</section>
+
+<section class="pane" id="cards">
+<div class="card"><h3>Flashcards</h3><p id="fcn" style="color:var(--muted);margin:0"></p>
+<div class="fc"><div id="fc" tabindex="0" role="button" aria-label="Flip card"></div></div>
+<div class="row"><button class="btn alt" id="fp">Previous</button><button class="btn alt" id="ff">Flip</button><button class="btn" id="fn">Next</button><button class="btn alt" id="fs">Shuffle</button></div></div>
+</section>
+
+<section class="pane" id="quiz">
+<div class="card"><h3>Quiz</h3><div id="qz"></div></div>
+</section>
+
+</main></div>
+
+<script>
+var $=function(s){return document.querySelector(s)};
+var panes=[["home","Home"],["tableau","Connect, Inspect, Build"],["sets","Groups and Sets"],["style","Style, Dashboard, Share"],["colab","Data Cleaning (Colab)"],["cards","Flashcards"],["quiz","Quiz"]];
+var nav=$("#nav");
+panes.forEach(function(p){var a=document.createElement("a");a.href="#"+p[0];a.textContent=p[1];a.dataset.id=p[0];nav.appendChild(a)});
+nav.insertAdjacentHTML("beforeend",'<div class="bar"><i id="prog"></i></div>');
+var seen={};
+function go(id){
+  if(!panes.some(function(p){return p[0]===id}))id="home";
+  document.querySelectorAll(".pane").forEach(function(e){e.classList.toggle("on",e.id===id)});
+  nav.querySelectorAll("a").forEach(function(a){a.classList.toggle("on",a.dataset.id===id)});
+  seen[id]=1;$("#prog").style.width=Math.round(Object.keys(seen).length/panes.length*100)+"%";
+  window.scrollTo(0,0);
+}
+window.addEventListener("hashchange",function(){go(location.hash.slice(1))});
+document.addEventListener("click",function(e){var b=e.target.closest("[data-go]");if(b){location.hash=b.dataset.go}});
+go(location.hash.slice(1));
+
+/* Colab steps */
+var cs=[
+["Import the Pandas library","Pandas is a Python library for structured data. Import it with the alias pd.","import pandas as pd"],
+["Load the dataset","Upload the file to Colab and make sure the filename matches the path. read_excel() or read_csv() loads it into a DataFrame named df (rows and columns, like a spreadsheet).","# Excel file\ndf = pd.read_excel('/content/data.xlsx')\n# CSV file\ndf = pd.read_csv('/content/data.csv')"],
+["Display the first five rows","head() shows column names, sample values, and structure before cleaning.","df.head()"],
+["Inspect dataset information","info() shows rows and columns, non-null counts, data types, and memory usage.","df.info()"],
+["Display descriptive statistics","describe() gives count, mean, standard deviation, min, max, and quartiles for numeric columns.","df.describe()"],
+["Correct data types","astype('Int64') converts Customer_ID to a nullable integer. Unlike int64, Int64 supports missing values.","df['Customer_ID'] = df['Customer_ID'].astype('Int64')\ndf.info()"],
+["Count duplicate records","duplicated() flags rows with identical values across all columns; sum() counts them.","print('The total number of duplicates:', df.duplicated().sum())"],
+["Display all duplicate records","keep=False marks every occurrence of a duplicated row (including the original) so you can inspect before deleting.","duplicate = df[df.duplicated(keep=False)]\nduplicate"],
+["Remove duplicate records","drop_duplicates() keeps the first occurrence by default. inplace=True updates the existing DataFrame.","df.drop_duplicates(inplace=True)\nprint('The updated total number of duplicates:', df.duplicated().sum())"],
+["Count missing values","isnull() finds missing values; sum() counts them per column.","df.isnull().sum()"],
+["Remove columns with only missing values","axis=1 means columns. how='all' removes a column only if every value is missing.","df.dropna(axis=1, how='all', inplace=True)\ndf.isnull().sum()"],
+["Handle missing values","Replace COLUMN_NAME with your actual column name. Categorical (text): mode. Numerical: mean.","# Categorical\ndf['COLUMN_NAME'] = df['COLUMN_NAME'].fillna(df['COLUMN_NAME'].mode()[0])\n# Numerical\ndf['COLUMN_NAME'] = df['COLUMN_NAME'].fillna(df['COLUMN_NAME'].mean())"]
+];
+var sh="<h3>Cleaning workflow, step by step</h3>";
+cs.forEach(function(s,i){sh+='<details><summary>Step '+(i+1)+'. '+s[0]+'</summary><div><p>'+s[1]+'</p><pre><button class="copy">Copy</button><code>'+s[2].replace(/&/g,"&amp;").replace(/</g,"&lt;")+'</code></pre></div></details>'});
+$("#steps").innerHTML=sh;
+document.addEventListener("click",function(e){var b=e.target.closest(".copy");if(!b)return;var t=b.nextElementSibling.textContent;try{navigator.clipboard.writeText(t)}catch(x){}b.textContent="Copied";setTimeout(function(){b.textContent="Copy"},1200)});
+
+/* Flashcards */
+var deck=[
+["What is Tableau?","A business intelligence and data visualization tool for connecting to data, analyzing it, building interactive visuals, and communicating insights."],
+["Six steps of the Tableau workflow","Connect, Inspect, Build, Style, Dashboard, Share."],
+["What does the Columns shelf do?","Organizes data horizontally in a chart (e.g., Category splits into three groups)."],
+["What does the Rows shelf do?","Organizes data vertically; SUM(Sales) in Rows shows total sales on the Y-axis."],
+["What does the Marks card control?","Color, label, size, and tooltip details of the visualization."],
+["Group vs. Set","Group combines members into one category. Set defines an In/Out subset based on members or conditions."],
+["How to make a Top 5 Set","Right-click Sub-Category, Create Set, Top tab, By Field, Top 5 by SUM(Sales), OK."],
+["Which function counts missing values per column?","df.isnull().sum()"],
+["What does keep=False do in duplicated()?","Marks every occurrence of a duplicate, including the original, for inspection."],
+["Why use astype('Int64')?","It is a nullable integer type, so it supports missing values (unlike int64)."],
+["What does dropna(axis=1, how='all') do?","Removes columns where every value is missing."],
+["Mean or mode for Payment_Method?","Mode, because it is categorical. Mean is for numerical data like Amount."]
+];
+var fi=0,fl=false;
+function fshow(){var d=$("#fc");d.textContent=fl?deck[fi][1]:deck[fi][0];d.classList.toggle("flip",fl);$("#fcn").textContent="Card "+(fi+1)+" of "+deck.length+(fl?" (answer)":" (question)")}
+function fflip(){fl=!fl;fshow()}
+$("#fc").onclick=fflip;$("#ff").onclick=fflip;
+$("#fc").onkeydown=function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();fflip()}};
+$("#fn").onclick=function(){fi=(fi+1)%deck.length;fl=false;fshow()};
+$("#fp").onclick=function(){fi=(fi-1+deck.length)%deck.length;fl=false;fshow()};
+$("#fs").onclick=function(){deck.sort(function(){return Math.random()-.5});fi=0;fl=false;fshow()};
+fshow();
+
+/* Quiz */
+var Q=[
+["Which step involves checking for missing values, duplicates, and wrong data types?",["Connect","Inspect","Build","Share"],1],
+["In the bar chart example, which field is on Columns?",["SUM(Sales)","Region","Category","AVG(Sales)"],2],
+["What does SUM(Sales) on the Rows shelf show?",["Total sales per category on the Y-axis","Average profit","The number of rows","Filtered regions"],0],
+["An empty Filters shelf means...",["The chart is broken","No worksheet-level filter is applied","All data is hidden","A set is active"],1],
+["Tableau commonly classifies Set members as...",["Top or Bottom","True or False","In or Out","Rows or Columns"],2],
+["Which creates a Group of Xerox products?",["Right-click Product Name, Create Group","Right-click Sub-Category, Create Set","Drag Region to Filters","Marks, then Tooltip"],0],
+["Where do you add hover details like profit and quantity sold?",["Marks, then Color","Marks, then Tooltip","Rows shelf","Data Source page"],1],
+["Which pandas call counts missing values per column?",["df.head()","df.describe()","df.isnull().sum()","df.duplicated().sum()"],2],
+["Why use astype('Int64') instead of int64?",["It is faster","It supports missing values","It converts text to dates","It removes duplicates"],1],
+["What does keep=False do in df.duplicated(keep=False)?",["Keeps only the first row","Deletes duplicates","Marks every occurrence of a duplicate","Ignores the original rows"],2],
+["Which removes columns where every value is missing?",["df.dropna(axis=1, how='all', inplace=True)","df.drop_duplicates(inplace=True)","df.fillna(0)","df.info()"],0],
+["Best way to fill missing Payment_Method values?",["mean()","mode()[0]","sum()","describe()"],1]
+];
+var qi=0,qs=0,qo=[];
+function qstart(){qo=Q.map(function(_,i){return i}).sort(function(){return Math.random()-.5});qi=0;qs=0;qshow()}
+function qshow(){
+  var box=$("#qz");
+  if(qi>=qo.length){box.innerHTML='<p style="font-size:20px"><b>Score: '+qs+' / '+qo.length+'</b></p><p>'+(qs===qo.length?"Perfect run.":qs>=qo.length*.75?"Strong. Review the ones you missed.":"Revisit the sections, then try again.")+'</p><button class="btn" id="qr">Retake quiz</button>';$("#qr").onclick=qstart;return}
+  var q=Q[qo[qi]];
+  box.innerHTML='<p style="color:var(--muted);margin:0">Question '+(qi+1)+' of '+qo.length+'</p><p><b>'+q[0]+'</b></p>'+q[1].map(function(o,i){return '<button class="opt" data-i="'+i+'">'+o+'</button>'}).join("")+'<div class="fb" id="fb"></div><button class="btn" id="qn" hidden>Next</button>';
+  box.querySelectorAll(".opt").forEach(function(b){b.onclick=function(){
+    var i=+b.dataset.i,ok=i===q[2];if(ok)qs++;
+    box.querySelectorAll(".opt").forEach(function(x){x.disabled=true;if(+x.dataset.i===q[2])x.classList.add("ok")});
+    if(!ok)b.classList.add("bad");
+    $("#fb").textContent=ok?"Correct.":"Not quite. The answer is: "+q[1][q[2]];
+    var n=$("#qn");n.hidden=false;n.textContent=qi===qo.length-1?"See score":"Next";n.onclick=function(){qi++;qshow()};n.focus();
+  }});
+}
+qstart();
+
+/* Search */
+$("#q").addEventListener("input",function(){
+  var t=this.value.trim().toLowerCase();
+  document.querySelectorAll("mark").forEach(function(m){m.replaceWith(document.createTextNode(m.textContent));});
+  document.querySelectorAll(".card").forEach(function(c){c.parentElement.normalize()});
+  document.querySelectorAll(".pane .card").forEach(function(c){c.style.display=""});
+  if(t.length<2)return;
+  var first=null;
+  document.querySelectorAll("#tableau .card,#sets .card,#style .card,#colab .card,#home .card").forEach(function(c){
+    var hit=c.textContent.toLowerCase().indexOf(t)>-1;
+    if(hit&&!first)first=c;
+    c.style.outline=hit?"2px solid var(--maroon)":"";
+    c.querySelectorAll("details").forEach(function(d){if(hit&&d.textContent.toLowerCase().indexOf(t)>-1)d.open=true});
+  });
+  if(first){var pane=first.closest(".pane").id;if(location.hash.slice(1)!==pane)location.hash=pane;first.scrollIntoView({block:"center"})}
+});
+
+/* Theme */
+var themes=["auto","light","dark"],ti=0;
+$("#th").onclick=function(){ti=(ti+1)%3;var r=document.documentElement;if(themes[ti]==="auto")r.removeAttribute("data-theme");else r.setAttribute("data-theme",themes[ti]);this.textContent="Theme: "+themes[ti]};
+</script>
+</body>
+</html>
